@@ -38,7 +38,8 @@
                     <td><a href="{% url 'user_detail_page' ticket.user_assigned%}">{{ticket.user_assigned}}</a></td>
                     {%endif%}
                     <td><a href="{% url 'user_detail_page' ticket.user_filed%}">{{ticket.user_filed}}</a></td>
-                    <td>{{ticket.time_submitted}}</td>
+                    <td>{{ticket.age}}</td>
+
                     {%endif%}
                 </tr>
                 {% endfor %}

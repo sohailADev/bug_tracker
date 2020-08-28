@@ -35,7 +35,7 @@
 }
 body
 {
-background-image:url("download.JPG");
+/* background-image:url("download.JPG");
 filter: blur(8px);
--webkit-filter: blur(8px);
+-webkit-filter: blur(8px); */
 }

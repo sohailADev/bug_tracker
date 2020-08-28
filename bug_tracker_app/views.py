@@ -7,7 +7,8 @@ from django.contrib import messages
     
 @login_required(login_url='login_page')
 def index_view(request):
-    all_tickets = models.TicketModel.objects.all()    
+    all_tickets = models.TicketModel.objects.all()  
+  
     return render(request,'dashboard.htm',{'all_tickets':all_tickets})
 
 def login_view(request):

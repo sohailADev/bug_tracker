@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
+from datetime import datetime, timezone
 
 class CustomUserModel(AbstractUser):
     bio = models.CharField(max_length=100)
@@ -24,6 +24,12 @@ class TicketModel(models.Model):
     user_ticket_completed = models.ForeignKey(CustomUserModel,on_delete=models.CASCADE,null=True,related_name = 'user_ticket_completed')
     def __str__(self):
         return self.title
+    @property
+    def age(self):      
+        date_in_datebase = self.time_submitted
+        current_date = datetime.now(timezone.utc)
+        diffencce_date = current_date - date_in_datebase
+        return diffencce_date.days
 
 
  
