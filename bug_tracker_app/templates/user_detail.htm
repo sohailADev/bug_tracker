@@ -1,7 +1,53 @@
 {% extends "base.htm" %}
 {% block content %}
-<a class="btn btn-primary" href="{% url 'add_ticket_page'  %}">Create new Ticket</a>
+<div class="card" id="dashboard_card">
+    <div class="card-header">
+        <h3><b>User Detail</b></h3>
+    </div>
+    <div class="card-body">
+        <div>User : {{user.user_filed.username}}</div>
+        <div>Bio : {{user.user_filed.bio}}</div>
+        <div>Email : {{user.user_filed.email}}</div>
+    </div>
+</div>
+<div class="card" id="dashboard_card">
+    <div class="card-body">
+        <div class="card-header">
+            <h3><b>Filed Tickets</b></h3>
+        </div>
+        <table class="table">
+            <tbody>
+                <thead>
+                    <tr>
+                        <th scope=" col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">Assigned To</th>
+                        <th scope="col">Reported By</th>
+                        <th scope="col">Ticket Age</th>
+                    </tr>
+                </thead>
+                {% for ticket in all_tickets %}
+                <tr>
+                    <td>{{ticket.id}}</td>
+                    <td><a href="{% url 'ticket_detail_page' ticket.id %}"> {{ticket.title}}</a></td>
+                    <td></td>
+                    <td></td>
+                    {% if ticket.user_assigned ==  None  %}
+                    <td></td>
+                    {%else%}
+                    <td><a href="{% url 'user_detail_page' ticket.user_assigned %}">{{ticket.user_assigned}}</a></td>
+                    {%endif%}
+                    <td><a href="{% url 'user_detail_page' ticket.user_filed%}">{{ticket.user_filed}}</a></td>
+                    <td>{{ticket.time_submitted}}</td>
 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 <div class="card" id="dashboard_card">
     <div class="card-body">
         <div class="card-header">
@@ -74,7 +120,7 @@
                 {% for ticket in all_tickets %}
 
                 <tr>
-                    {% if ticket.status == 'In Progress' %}
+                    {% if ticket.status == "In Progress" %}
                     <td>{{ticket.id}}</td>
                     <td><a href="{% url 'ticket_detail_page' ticket.id %}"> {{ticket.title}}</a></td>
                     <td></td>
@@ -124,7 +170,7 @@
                 {% for ticket in all_tickets %}
 
                 <tr>
-                    {% if ticket.status == 'Done' %}
+                    {% if ticket.status == "Done" %}
                     <td>{{ticket.id}}</td>
                     <td><a href="{% url 'ticket_detail_page' ticket.id %}"> {{ticket.title}}</a></td>
                     <td></td>
@@ -195,5 +241,4 @@
     </div>
 </div>
 
-
-{% endblock %}
+{%endblock%}
